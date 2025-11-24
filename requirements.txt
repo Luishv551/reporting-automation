@@ -1,0 +1,5 @@
+fastapi>=0.121.3
+pandas>=2.3.3
+python-dotenv>=1.2.1
+pywin32>=308
+uvicorn>=0.38.0

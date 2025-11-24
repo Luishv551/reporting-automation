@@ -1,54 +1,55 @@
-"""Email notification sender."""
+"""Email notification sender using Outlook COM API."""
 
-import smtplib
+import win32com.client
+import pythoncom
 from pathlib import Path
 from typing import Dict
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.application import MIMEApplication
 
 from .config import config
 
 
 class EmailSender:
-    """Sends email notifications with attachments."""
+    """Sends email notifications via Outlook COM API."""
 
     def send_report(self, month: str, summary: Dict, xml_path: str):
         """
-        Send transactional report via email.
+        Send transactional report via Outlook.
+
+        Uses Outlook COM API to avoid authentication issues with
+        modern security policies (MFA, OAuth2, disabled basic auth).
 
         Args:
             month: Report month (YYYY-MM)
             summary: Summary dictionary
             xml_path: Path to XML report
         """
-        if not config.SMTP_USER or not config.EMAIL_TO:
-            raise ValueError("Email configuration missing in .env")
+        if not config.EMAIL_TO:
+            raise ValueError("EMAIL_TO missing in .env")
 
         # Build email body
         body = self._build_body(month, summary)
 
-        # Create message
-        msg = MIMEMultipart()
-        msg['Subject'] = f'Transactional Report — {month}'
-        msg['From'] = config.EMAIL_FROM
-        msg['To'] = config.EMAIL_TO
+        # Initialize COM
+        pythoncom.CoInitialize()
+        try:
+            # Create Outlook instance
+            outlook = win32com.client.Dispatch('outlook.application')
+            mail = outlook.CreateItem(0)  # 0 = MailItem
 
-        msg.attach(MIMEText(body, 'plain'))
+            # Set properties
+            mail.Subject = f'Transactional Report — {month}'
+            mail.To = config.EMAIL_TO
+            mail.Body = body
 
-        # Attach XML
-        xml_file = Path(xml_path)
-        if xml_file.exists():
-            with open(xml_file, 'rb') as f:
-                attachment = MIMEApplication(f.read(), _subtype='xml')
-                attachment.add_header('Content-Disposition', 'attachment', filename=xml_file.name)
-                msg.attach(attachment)
+            # Attach XML
+            xml_file = Path(xml_path)
+            if xml_file.exists():
+                mail.Attachments.Add(str(xml_file.absolute()))
 
-        # Send
-        with smtplib.SMTP(config.SMTP_HOST, config.SMTP_PORT) as server:
-            server.starttls()
-            server.login(config.SMTP_USER, config.SMTP_PASS)
-            server.send_message(msg)
+            # Send
+            mail.Send()
+        finally:
+            pythoncom.CoUninitialize()
 
     def _build_body(self, month: str, summary: Dict) -> str:
         """Build email body text."""

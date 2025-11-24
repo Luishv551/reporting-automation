@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TransactionsReport month="2023-08" generated_at="2025-11-24T12:59:19Z">
+    <Transaction id="TX-251296">
+        <Status>approved</Status>
+        <Date>2023-08-02</Date>
+        <Amount currency="BRL">9766.46</Amount>
+        <Type>DEBIT</Type>
+        <MerchantId>40755994000100</MerchantId>
+        <Network>1</Network>
+        <Category>DEBIT</Category>
+    </Transaction>
+    <Transaction id="TX-358678">
+        <Status>approved</Status>
+        <Date>2023-08-12</Date>
+        <Amount currency="BRL">8632.17</Amount>
+        <Type>CREDIT</Type>
+        <MerchantId>46993233000121</MerchantId>
+        <Network>3</Network>
+        <Category>CREDIT</Category>
+    </Transaction>
+    <Transaction id="TX-792070">
+        <Status>approved</Status>
+        <Date>2023-08-25</Date>
+        <Amount currency="BRL">9825.41</Amount>
+        <Type>DEBIT</Type>
+        <MerchantId>62434708000136</MerchantId>
+        <Network>1</Network>
+        <Category>DEBIT</Category>
+    </Transaction>
+    <Transaction id="TX-272713">
+        <Status>approved</Status>
+        <Date>2023-08-04</Date>
+        <Amount currency="BRL">7325.41</Amount>
+        <Type>CREDIT</Type>
+        <MerchantId>34648838000155</MerchantId>
+        <Network>2</Network>
+        <Category>CREDIT</Category>
+    </Transaction>
+    <Transaction id="TX-796931">
+        <Status>approved</Status>
+        <Date>2023-08-01</Date>
+        <Amount currency="BRL">4571.57</Amount>
+        <Type>CREDIT</Type>
+        <MerchantId>33937338000181</MerchantId>
+        <Network>1</Network>
+        <Category>CREDIT</Category>
+    </Transaction>
+    <Transaction id="TX-763530">
+        <Status>approved</Status>
+        <Date>2023-08-22</Date>
+        <Amount currency="BRL">7852.70</Amount>
+        <Type>DEBIT</Type>
+        <MerchantId>78950573000179</MerchantId>
+        <Network>3</Network>
+        <Category>DEBIT</Category>
+    </Transaction>
+    <Transaction id="TX-610292">
+        <Status>approved</Status>
+        <Date>2023-08-25</Date>
+        <Amount currency="BRL">1500.97</Amount>
+        <Type>DEBIT</Type>
+        <MerchantId>60554274000139</MerchantId>
+        <Network>3</Network>
+        <Category>DEBIT</Category>
+    </Transaction>
+    <Transaction id="TX-278477">
+        <Status>approved</Status>
+        <Date>2023-08-14</Date>
+        <Amount currency="BRL">9065.00</Amount>
+        <Type>DEBIT</Type>
+        <MerchantId>77491362000121</MerchantId>
+        <Network>2</Network>
+        <Category>DEBIT</Category>
+    </Transaction>
+</TransactionsReport>

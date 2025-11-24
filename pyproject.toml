@@ -1,12 +1,13 @@
 [project]
 name = "reporting-automation"
 version = "0.1.0"
-description = "Add your description here"
+description = "Local transaction reporting system with CSV to XML transformation"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.121.3",
     "pandas>=2.3.3",
     "python-dotenv>=1.2.1",
+    "pywin32>=308",
     "uvicorn>=0.38.0",
 ]

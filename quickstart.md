@@ -1,49 +1,55 @@
 # Quickstart
 
-## 1. Instalar Dependências
+## 1. Install Dependencies
 
 ```bash
-uv add pandas python-dotenv fastapi uvicorn
+uv venv
+uv sync
 ```
 
-## 2. Configurar Email
+## 2. Configure Email
 
-Copie o arquivo de exemplo:
+Copy the example file:
 ```bash
 cp .env.example .env
 ```
 
-Edite `.env` com suas credenciais do Outlook:
+Edit `.env` with your recipient email:
 ```env
-SMTP_USER=seu-email@outlook.com
-SMTP_PASS=sua-senha
-EMAIL_TO=destinatario@example.com
+EMAIL_TO=recipient@example.com
 ```
 
-## 3. Rodar
+**Important**: This system uses Outlook COM API for email sending. Ensure:
+- Windows OS
+- Outlook desktop application installed
+- Outlook configured with an authenticated account
 
-### Modo CLI
+No SMTP credentials required.
 
-**Gerar relatório** (sem email):
+## 3. Run
+
+### CLI Mode
+
+**Generate report** (no email):
 ```bash
 python app.py --month=2023-08 --input=./data/data.csv --output=./outputs
 ```
 
-**Gerar e enviar email**:
+**Generate and send email**:
 ```bash
 python app.py --month=2023-08 --input=./data/data.csv --output=./outputs --send-email
 ```
 
-### Modo API (REST)
+### API Mode (REST)
 
-**Iniciar servidor**:
+**Start server**:
 ```bash
 python run_api.py
 ```
 
-Acesse: http://127.0.0.1:8000/docs (documentação interativa)
+Access: http://127.0.0.1:8000/docs (interactive documentation)
 
-**Gerar relatório via API**:
+**Generate report via API**:
 ```bash
 curl -X POST "http://127.0.0.1:8000/reports/generate" \
   -H "Content-Type: application/json" \
@@ -55,18 +61,18 @@ curl -X POST "http://127.0.0.1:8000/reports/generate" \
   }'
 ```
 
-**Consultar status do job**:
+**Check job status**:
 ```bash
 curl "http://127.0.0.1:8000/jobs/{job_id}"
 ```
 
 ## Outputs
 
-Os arquivos são gerados em `outputs/YYYYMM/`:
-- `report.xml` - Relatório XML com transações
-- `summary.json` - Resumo com métricas
+Files are generated in `outputs/YYYYMM/`:
+- `report.xml` - XML report with transactions
+- `summary.json` - Summary with metrics
 
-## Testar Outros Meses
+## Test Other Months
 
 ```bash
 python app.py --month=2023-01 --input=./data/data.csv
